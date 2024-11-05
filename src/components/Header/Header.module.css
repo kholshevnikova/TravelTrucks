@@ -1,0 +1,40 @@
+@import url(../../variables.css);
+
+.container {
+  min-width: 1440px; 
+  border-bottom: 1px solid var(--badges);
+  width: 1440px;
+  height: 72px;
+  background: var(--inputs);
+  display: flex;
+  text-align: center;
+}
+
+.logo {
+  padding-top: 28px;
+  padding-right: 450px;
+  padding-bottom: 28px;
+  padding-left: 64px;
+}
+
+.navlist {
+  display: flex;
+  padding-top: 24px;
+  list-style-type: none;
+  gap: 32px;
+}
+
+.navListItem {
+  font-weight: 500;
+  font-size: 16px;
+  line-height: 150%;
+  text-align: center;
+  color: var(--main);
+}
+.navListItem:hover {
+color: var(--button-hover);
+}
+.navListItem:active {
+color: var(--button-hover);
+}
+

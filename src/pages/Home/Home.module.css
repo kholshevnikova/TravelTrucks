@@ -1,0 +1,39 @@
+.homePageSection {
+    min-width: 1440px;
+}
+
+.container {
+    background-image: url(../../assets/Picture-background.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    padding: 260px 805px 260px 64px;
+    
+}
+.heroTitle {
+    font-weight: 600;
+    font-size: 48px;
+    line-height: 67%;
+    color: var(--inputs);
+    margin-bottom: 16px;
+}
+.heroText {
+    font-weight: 600;
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--inputs);
+    margin-bottom: 40px;
+}
+.heroButton {
+    font-family: "Inter", sans-serif;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    border-radius: 200px;
+    padding: 16px 48,5px;
+    width: 173px;
+    height: 56px;
+    background: var(--button);
+    margin: 0 auto;
+}
