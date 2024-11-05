@@ -1,14 +1,7 @@
-import css from "./Catalog.module.css";
-import {
-  selectCampers,
-  selectIsError,
-  selectIsLoading,
-} from "../../redux/campers/selectors";
-import { useDispatch, useSelector } from "react-redux";
-import { fetchCampers } from "../../redux/campers/operation";
-// import { BsWind, BsDiagram3 } from "react-icons/bs";
-import { selectFilters } from "../../redux/filters/selectors";
-import setLocation from "../../redux/filters/slice";
+import css from "./CatalogList.module.css";
+
+// import { fetchCampers } from "../../redux/campers/operation";
+import { BsWind, BsDiagram3 } from "react-icons/bs";
 
 export default function CatalogList() {
   return (
@@ -20,9 +13,9 @@ export default function CatalogList() {
               className={css.locationInput}
               type="text"
               placeholder="Location"
-              onChange={handleChange}
+              // onChange={handleChange}
               name="location"
-              value={filters.location}
+              // value={filters.location}
             />
           </label>
         </div>
@@ -47,9 +40,9 @@ export default function CatalogList() {
             <li
               type="button"
               name="Bathroom"
-              onClick={filters.equipment.bathroom}
-              onChange={handleFilterChange}
-              className={css.filterListItem}
+              // onClick={filters.equipment.bathroom}
+              // onChange={handleFilterChange}
+              // className={css.filterListItem}
             >
               Bathroom
             </li>
@@ -57,43 +50,16 @@ export default function CatalogList() {
         </div>
         <div className={css.typeContainer}>
           <h3 className={css.filterText}>Vehicle type</h3>
-          <select
-            name="form"
-            value={filters.form}
-            onChange={handleFilterChange}
-          >
-            <option value="">Any</option>
-            <option value="alcove">Alcove</option>
-            <option value="integrated">Integrated</option>
-            <option value="semi-integrated">Semi-integrated</option>
-          </select>
         </div>
         <button
           className={css.searchButton}
-          onClick={() => dispatch(fetchCampers(filters))}
+          // onClick={() => dispatch(fetchCampers(filters))}
         >
           Search
         </button>
       </div>
       <main>
-        <ul className={css.carList}>
-          {isLoading ? (
-            <li>Loading...</li>
-          ) : isError ? (
-            <li>{isError}</li>
-          ) : campers.length > 0 ? (
-            campers.map((camper) => (
-              <li key={camper.id}>
-                <h3>{camper.name}</h3>
-                <p>{camper.description}</p>
-                <p>Price: {camper.price.toFixed(2)} UAH</p>
-                <p>Rating: {camper.rating} ⭐</p>
-              </li>
-            ))
-          ) : (
-            <li>No campers available.</li>
-          )}
-        </ul>
+        <ul className={css.carList}></ul>
       </main>
     </section>
   );
