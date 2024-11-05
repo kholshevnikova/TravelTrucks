@@ -36,4 +36,5 @@
     height: 56px;
     background: var(--button);
     margin: 0 auto;
+    border: none;
 }
