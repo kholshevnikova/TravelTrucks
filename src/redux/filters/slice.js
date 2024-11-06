@@ -1,41 +1,42 @@
-import { createSlice } from "@reduxjs/toolkit";
+// import { createSlice } from "@reduxjs/toolkit";
 
-const filtersSlice = createSlice({
-  name: "filters",
-  initialState: {
-    location: "",
-    type: "",
-    equipment: {
-      AC: false,
-      kitchen: false,
-      bathroom: false,
-      TV: false,
-    },
-  },
-  reducers: {
-    setLocation: (state, action) => {
-      state.location = action.payload;
-    },
-    setType: (state, action) => {
-      state.type = action.payload;
-    },
-    toggleEquipment: (state, action) => {
-      const equipmentKey = action.payload;
-      state.equipment[equipmentKey] = !state.equipment[equipmentKey];
-    },
-    resetFilters: (state) => {
-      state.location = "";
-      state.type = "";
-      state.equipment = {
-        AC: false,
-        kitchen: false,
-        bathroom: false,
-        TV: false,
-      };
-    },
-  },
-});
+// const initialState = {
+//   location: "",
+//   venicleType: "",
+//   equipment: {
+//     AC: false,
+//     kitchen: false,
+//     bathroom: false,
+//     TV: false,
+//   },
+// };
 
-export const { setLocation, setType, toggleEquipment, resetFilters } =
-  filtersSlice.actions;
-export default filtersSlice.reducer;
+// const filtersSlice = createSlice({
+//   name: "filters",
+//   initialState,
+//   reducers: {
+//     setLocation: (state, action) => {
+//       state.location = action.payload;
+//     },
+//     setVenicleType: (state, action) => {
+//       state.venicleType = action.payload;
+//     },
+//     toggleEquipment: (state, action) => {
+//       state.equipment[action.payload] = !state.equipment[action.payload];
+//     },
+//     resetFilters: (state) => {
+//       state.location = "";
+//       state.venicleType = "";
+//       state.equipment = {
+//         AC: false,
+//         kitchen: false,
+//         bathroom: false,
+//         TV: false,
+//       };
+//     },
+//   },
+// });
+
+// export const { setLocation, setVenicleType, toggleEquipment, resetFilters } =
+//   filtersSlice.actions;
+// export default filtersSlice.reducer;
