@@ -1,6 +1,9 @@
 .carList {
     width: 888px;
     display: flex;
+    list-style-type: none;
+    flex-wrap: wrap;
+    gap: 32px;
 }
 .catalogSection {
     padding-top: 48px;

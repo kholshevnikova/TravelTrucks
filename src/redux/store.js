@@ -1,6 +1,5 @@
 import { configureStore } from "@reduxjs/toolkit";
 import campersReducer from "./campers/slice";
-// import filtersReducer from "./filters/slice";
 import {
   persistStore,
   persistReducer,
@@ -16,7 +15,7 @@ import storage from "redux-persist/lib/storage";
 const persistConfig = {
   key: "campers",
   storage,
-  whitelist: ["items"],
+  whitelist: ["campers"],
 };
 
 const persistedContactsReducer = persistReducer(persistConfig, campersReducer);
