@@ -8,13 +8,16 @@ import {
   selectIsLoading,
   selectPage,
 } from "../../redux/campers/selectors";
+import { useNavigate } from "react-router-dom";
 export default function CatalogList() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
   const campers = useSelector(selectCampers);
   const page = useSelector(selectPage);
   const loading = useSelector(selectIsLoading);
 
   useEffect(() => {
+    // dispatch(resetPage());
     dispatch(fetchCampers(page));
   }, [dispatch, page]);
 
@@ -22,7 +25,10 @@ export default function CatalogList() {
     dispatch(incrementPage());
   };
 
-  console.log(campers);
+  const handleShowMore = (id) => {
+    navigate(`/catalog/${id}`);
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -35,7 +41,9 @@ export default function CatalogList() {
             <li key={`${camper.id}-${index}`} className={css.carItem}>
               <div className={css.carItemContainer}>
                 <img
-                  src={camper.imageUrl}
+                  src={
+                    camper.gallery?.[0]?.thumb || camper.gallery?.[0]?.original
+                  }
                   alt={camper.name}
                   className={css.carImage}
                 />
@@ -59,8 +67,9 @@ export default function CatalogList() {
                     </div>
                   </div>
                   <div className={css.carDetailsContainer}>
-                    <p className={css.cardetailText}>
-                      ⭐️ {camper.rating} ({camper.reviewsCount} Reviews)
+                    <span>⭐️</span>
+                    <p className={css.carReviewsText}>
+                      {camper.rating} ({camper.reviewsCount} Reviews)
                     </p>
                     <div className={css.locationContainer}>
                       <svg
@@ -79,7 +88,9 @@ export default function CatalogList() {
                       <p className={css.cardDetailText}>{camper.location}</p>
                     </div>
                   </div>
-                  <p className={css.carInfotext}>{camper.description}</p>
+                  <p className={css.carInfotext}>
+                    {camper.description.slice(0, 60) + "..."}
+                  </p>
                   <div className={css.badgesContainer}>
                     <ul className={css.badgesList}>
                       {camper.equipment &&
@@ -91,7 +102,12 @@ export default function CatalogList() {
                         ))}
                     </ul>
                   </div>
-                  <button className={css.showMoreButton}>Show more</button>
+                  <button
+                    onClick={() => handleShowMore(camper.id)}
+                    className={css.showMoreButton}
+                  >
+                    Show more
+                  </button>
                 </div>
               </div>
             </li>

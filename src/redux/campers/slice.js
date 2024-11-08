@@ -28,6 +28,9 @@ const campersSlice = createSlice({
     incrementPage(state) {
       state.page += 1;
     },
+    resetPage(state) {
+      state.page = 1;
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -37,7 +40,13 @@ const campersSlice = createSlice({
       })
       .addCase(fetchCampers.fulfilled, (state, action) => {
         state.loading = false;
-        state.campers = [...state.campers, ...action.payload.items];
+        // Добавляем новые карточки только если это не первый запрос
+        if (state.page > 1) {
+          state.campers = [...state.campers, ...action.payload.items];
+        } else {
+          state.campers = action.payload.items;
+        }
+
         state.total = action.payload.total;
       })
       .addCase(fetchCampers.rejected, (state, action) => {
@@ -48,4 +57,5 @@ const campersSlice = createSlice({
 });
 
 export const { incrementPage } = campersSlice.actions;
+export const { resetPage } = campersSlice.actions;
 export default campersSlice.reducer;

@@ -9,7 +9,6 @@
     padding-top: 48px;
 }
 .carItemContainer {
-    width: 888px;
     height: 368px; 
     display: flex;
     padding: 24px;
@@ -21,19 +20,22 @@
     border-radius: 10px;
     width: 292px;
     height: 320px;
+    object-fit: cover;
+}
+.carInfo {
+    width: 524px;
 }
 .carText {
     font-weight: 600;
     font-size: 24px;
     line-height: 133%;
     color: var(--main);
-    margin-right: 248px;
 }
 .carPrice {
     font-weight: 600;
-        font-size: 24px;
-        line-height: 133%;
-        color: var(--main);
+    font-size: 24px;
+    line-height: 133%;
+    color: var(--main);
 
 }
 .carTitleContainer {
@@ -43,18 +45,22 @@
 .priceContainer {
     display: flex;
     gap: 12px;
+    margin-left: auto;
 }
 .locationContainer {
     display: flex;
     gap: 4px;
+    align-items: center;
+    justify-content: center;
 }
 
 .carDetailsContainer {
     display: flex;
     width: 524px;
     height: 32px;
-    gap: 16px;
+    /* gap: 16px; */
     margin-bottom: 24px;
+    align-items: center;
 }
 .cardDetailText {
     font-family: var(--font-family);
@@ -62,6 +68,20 @@
     font-size: 16px;
     line-height: 150%;
     color: var(--main);
+    justify-content: center;
+    align-items: center;
+    
+}
+.carReviewsText {
+    text-decoration: underline;
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--main);
+    justify-content: center;
+    align-items: center;
+    margin-right: 16px;
 }
 .carInfotext {
     font-family: var(--font-family);
