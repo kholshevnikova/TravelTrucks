@@ -1,5 +1,13 @@
 import { useState } from "react";
 import css from "./FiltersList.module.css";
+import { BsWind } from "react-icons/bs";
+import { BsDiagram3 } from "react-icons/bs";
+import { BsCupHot } from "react-icons/bs";
+import { FaTv } from "react-icons/fa";
+import { PiShower } from "react-icons/pi";
+import { BsGrid1X2 } from "react-icons/bs";
+import { BsGrid } from "react-icons/bs";
+import { BsGrid3X3Gap } from "react-icons/bs";
 
 export default function FiltersList({ onFilterChange }) {
   const [filters, setFilters] = useState({
@@ -70,30 +78,51 @@ export default function FiltersList({ onFilterChange }) {
           <div>
             <h2 className={css.vehicleText}>Vehicle equipment</h2>
             <hr className={css.line} />
-            {["AC", "Automatic", "Kitchen", "TV", "Bathroom"].map((item) => (
-              <button
-                key={item}
-                onClick={() => handleToggleEquipment(item)}
-                className={`${css.button} ${
-                  filters.features.includes(item) ? css.activeButton : ""
-                }`}
-              >
-                {item}
-              </button>
-            ))}
+            <div className={css.vehicleContainer}>
+              {["AC", "Automatic", "Kitchen", "TV", "Bathroom"].map((item) => (
+                <button
+                  key={item}
+                  onClick={() => handleToggleEquipment(item)}
+                  className={`${css.button} ${
+                    filters.features.includes(item) ? css.activeButton : ""
+                  }`}
+                >
+                  <div className={css.buttonContainer}>
+                    {item === "AC" && <BsWind className={css.icon} />}
+                    {item === "Automatic" && (
+                      <BsDiagram3 className={css.icon} />
+                    )}
+                    {item === "Kitchen" && <BsCupHot className={css.icon} />}
+                    {item === "TV" && <FaTv className={css.icon} />}
+                    {item === "Bathroom" && <PiShower className={css.icon} />}
+                    <span>{item}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
+
             <h2 className={css.vehicleText}>Vehicle type</h2>
             <hr className={css.line} />
-            {["Van", "Fully integrated", "Alcove"].map((type) => (
-              <button
-                key={type}
-                onClick={() => handleSetVehicleType(type)}
-                className={`${css.button} ${
-                  filters.form === type ? css.activeButton : ""
-                }`}
-              >
-                {type}
-              </button>
-            ))}
+            <div className={css.vehicleContainer}>
+              {["Van", "Fully integrated", "Alcove"].map((type) => (
+                <button
+                  key={type}
+                  onClick={() => handleSetVehicleType(type)}
+                  className={`${css.button} ${
+                    filters.form === type ? css.activeButton : ""
+                  }`}
+                >
+                  <div className={css.buttonContainer}>
+                    {type === "Van" && <BsGrid1X2 className={css.icon} />}
+                    {type === "Fully integrated" && (
+                      <BsGrid className={css.icon} />
+                    )}
+                    {type === "Alcove" && <BsGrid3X3Gap className={css.icon} />}
+                    <span>{type}</span>
+                  </div>
+                </button>
+              ))}
+            </div>
           </div>
         </li>
       </ul>
