@@ -1,0 +1,80 @@
+.filterContainer {
+    width: 360px;
+    list-style-type: none;
+}
+.locationText {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--gray);
+    margin-bottom: 8px;
+}
+.locationContainer {
+    border-radius: 12px;
+    background: var(--inputs);
+    border: none;
+    padding-top: 18px;
+    padding-bottom: 18px;
+    padding-left: 18px;
+    display: flex;
+    margin-bottom: 40px;
+}
+.locationField {
+    font-weight: 400;
+    font-size: 16px;
+    line-height: 1.5;
+    color: #101828;
+    border: none;
+    background: none;
+    outline: none;
+}
+.locationIcon {
+    margin-right: 8px;
+}
+.filterText {
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    color: var(--text);
+    margin-bottom: 32px;
+}
+.line {
+    stroke-width: 1px;
+    stroke: var(--gray-light);
+    margin-bottom: 24px;
+}
+.searchButton {
+    border-radius: 200px;
+    padding: 16px 60px;
+    width: 166px;
+    height: 56px;
+    background: var(--button);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    color: var(--white);
+    border: none;
+}
+.vehicleText {
+    margin-top: 32px;
+}
+.button {
+    border: 1px solid var(--gray-light);
+    border-radius: 12px;
+    padding: 16px 18px;
+    width: 112px;
+    height: 96px;
+    background-color: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+.button:hover {
+    border-color: var(--button);
+}
+.button:focus {
+    outline: none;
+}
+.activeButton {
+border: 1px solid var(--button);
+} 

@@ -3,26 +3,22 @@ import css from "./CatalogList.module.css";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/campers/slice.js";
 import { incrementPage } from "../../redux/campers/slice.js";
-import {
-  selectCampers,
-  selectIsLoading,
-  selectPage,
-} from "../../redux/campers/selectors";
 import { useNavigate } from "react-router-dom";
+
 export default function CatalogList() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  const campers = useSelector(selectCampers);
-  const page = useSelector(selectPage);
-  const loading = useSelector(selectIsLoading);
+  const { campers, filters, loading, total } = useSelector(
+    (state) => state.campers
+  );
 
   useEffect(() => {
-    // dispatch(resetPage());
-    dispatch(fetchCampers(page));
-  }, [dispatch, page]);
+    dispatch(fetchCampers(filters));
+  }, [dispatch, filters]);
 
   const handleLoadMore = () => {
     dispatch(incrementPage());
+    dispatch(fetchCampers({ ...filters, page: filters.page + 1 }));
   };
 
   const handleShowMore = (id) => {
@@ -51,7 +47,9 @@ export default function CatalogList() {
                   <div className={css.carTitleContainer}>
                     <h3 className={css.carText}>{camper.name}</h3>
                     <div className={css.priceContainer}>
-                      <p className={css.carPrice}>€{camper.price}</p>
+                      <p className={css.carPrice}>
+                        €{parseFloat(camper.price).toFixed(2)}
+                      </p>
                       <svg
                         width="24"
                         height="24"
@@ -113,9 +111,11 @@ export default function CatalogList() {
             </li>
           ))}
         </ul>
-        <button onClick={handleLoadMore} className={css.showMoreButton}>
-          Load More
-        </button>
+        {filters.page * 4 < total && (
+          <button onClick={handleLoadMore} className={css.loadMoreButton}>
+            Load More
+          </button>
+        )}
       </section>
     </div>
   );
