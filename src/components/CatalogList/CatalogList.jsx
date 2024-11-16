@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchCampers } from "../../redux/campers/slice.js";
 import { incrementPage } from "../../redux/campers/slice.js";
 import { useNavigate } from "react-router-dom";
+import { BsWind, BsCupHot, BsFuelPump, BsDiagram3 } from "react-icons/bs";
+const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 
 export default function CatalogList() {
   const dispatch = useDispatch();
@@ -91,15 +93,33 @@ export default function CatalogList() {
                   </p>
                   <div className={css.badgesContainer}>
                     <ul className={css.badgesList}>
-                      {camper.equipment &&
-                        Array.isArray(camper.equipment) &&
-                        camper.equipment.map((item, index) => (
-                          <li key={index} className={css.badgesItem}>
-                            {item}
-                          </li>
-                        ))}
+                      {camper.transmission && (
+                        <li className={css.badgesItem}>
+                          <BsDiagram3 className={css.icon} />
+                          {capitalize(camper.transmission)}
+                        </li>
+                      )}
+                      {camper.engine && (
+                        <li className={css.badgesItem}>
+                          <BsFuelPump className={css.icon} />
+                          {capitalize(camper.engine)}
+                        </li>
+                      )}
+                      {camper.kitchen && (
+                        <li className={css.badgesItem}>
+                          <BsCupHot className={css.icon} />
+                          Kitchen
+                        </li>
+                      )}
+                      {camper.AC && (
+                        <li className={css.badgesItem}>
+                          <BsWind className={css.icon} />
+                          AC
+                        </li>
+                      )}
                     </ul>
                   </div>
+
                   <button
                     onClick={() => handleShowMore(camper.id)}
                     className={css.showMoreButton}

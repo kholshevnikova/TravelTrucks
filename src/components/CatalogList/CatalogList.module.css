@@ -55,7 +55,7 @@
 .carDetailsContainer {
     display: flex;
     width: 524px;
-    height: 32px;
+    height: 24px;
     /* gap: 16px; */
     margin-bottom: 24px;
     align-items: center;
@@ -90,20 +90,31 @@
     margin-bottom: 24px;
 }
 .badgesItem {
+    padding: 12px 18px 12px 18px;
     border-radius: 100px;
-    width: 143px;
-    height: 48px;
+   
+    max-height: 48px;
     background: var(--badges);
+    display: flex;
+    justify-content: center;
+    gap: 2px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--main);
 }
 .badgesList {
     list-style-type: none;
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    max-width: 524px;
+    padding-right: 133px;
 }
 .badgesContainer {
     width: 524px;
-    padding-right: 133px;
+    height: 104px;
     margin-bottom: 24px;
 }
 .showMoreButton {
@@ -132,4 +143,8 @@
     line-height: 150%;
     letter-spacing: -0.01em;
     color: var(--main);
+}
+.icon {
+    width: 20px;
+    height: 20px;
 }

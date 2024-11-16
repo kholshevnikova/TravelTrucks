@@ -16,16 +16,29 @@ export default function FiltersList({ onFilterChange }) {
     features: [],
   });
 
+  const formatFormValue = (value) => {
+    switch (value) {
+      case "Van":
+        return "panelTruck";
+      case "Fully integrated":
+        return "fullyIntegrated";
+      case "Alcove":
+        return "alcove";
+      default:
+        return "";
+    }
+  };
+
   const handleInputChange = (e) => {
     setFilters((prev) => ({ ...prev, location: e.target.value }));
   };
 
   const handleToggleEquipment = (item) => {
     setFilters((prev) => {
-      const features = prev.features.includes(item)
+      const updatedFeatures = prev.features.includes(item)
         ? prev.features.filter((feature) => feature !== item)
         : [...prev.features, item];
-      return { ...prev, features };
+      return { ...prev, features: updatedFeatures };
     });
   };
 
@@ -34,7 +47,11 @@ export default function FiltersList({ onFilterChange }) {
   };
 
   const handleSearch = () => {
-    onFilterChange(filters);
+    const formattedFilters = {
+      ...filters,
+      form: formatFormValue(filters.form),
+    };
+    onFilterChange(formattedFilters);
   };
 
   return (
