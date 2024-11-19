@@ -1,4 +1,3 @@
-import { useState } from "react";
 import css from "./FiltersList.module.css";
 import { BsWind } from "react-icons/bs";
 import { BsDiagram3 } from "react-icons/bs";
@@ -8,50 +7,70 @@ import { PiShower } from "react-icons/pi";
 import { BsGrid1X2 } from "react-icons/bs";
 import { BsGrid } from "react-icons/bs";
 import { BsGrid3X3Gap } from "react-icons/bs";
+import { useDispatch, useSelector } from "react-redux";
+import { setFilters, fetchCampers } from "../../redux/campers/slice";
+// const vehicleTypeDisplayMap = {
+//   Van: "panelTruck",
+//   "Fully integrated": "fullyIntegrated",
+//   Alcove: "alcove",
+// };
 
-export default function FiltersList({ onFilterChange }) {
-  const [filters, setFilters] = useState({
-    location: "",
-    form: "",
-    features: [],
-  });
+export default function FiltersList() {
+  const dispatch = useDispatch();
+  const filters = useSelector((state) => state.campers.filters);
 
-  const formatFormValue = (value) => {
-    switch (value) {
-      case "Van":
-        return "panelTruck";
-      case "Fully integrated":
-        return "fullyIntegrated";
-      case "Alcove":
-        return "alcove";
-      default:
-        return "";
-    }
+  // const formatFormValue = (value) => {
+  //   switch (value) {
+  //     case "Van":
+  //       return "panelTruck";
+  //     case "Fully integrated":
+  //       return "fullyIntegrated";
+  //     case "Alcove":
+  //       return "alcove";
+  //     default:
+  //       return "";
+  //   }
+  // };
+  const featureKeyMap = {
+    AC: "AC", // с большой буквы
+    Bathroom: "bathroom", // с маленькой
+    Kitchen: "kitchen", // с маленькой
+    TV: "TV", // с маленькой
   };
 
   const handleInputChange = (e) => {
-    setFilters((prev) => ({ ...prev, location: e.target.value }));
+    dispatch(setFilters({ location: e.target.value }));
   };
 
   const handleToggleEquipment = (item) => {
-    setFilters((prev) => {
-      const updatedFeatures = prev.features.includes(item)
-        ? prev.features.filter((feature) => feature !== item)
-        : [...prev.features, item];
-      return { ...prev, features: updatedFeatures };
-    });
+    const mappedKey = featureKeyMap[item];
+
+    if (item === "Automatic") {
+      dispatch(
+        setFilters({
+          transmission: filters.transmission === "automatic" ? "" : "automatic",
+        })
+      );
+    } else {
+      const updatedFeatures = {
+        ...filters.features,
+        [mappedKey]: !filters.features[mappedKey],
+      };
+      dispatch(setFilters({ features: updatedFeatures }));
+    }
   };
 
   const handleSetVehicleType = (type) => {
-    setFilters((prev) => ({ ...prev, form: type }));
+    dispatch(setFilters({ form: type }));
   };
 
   const handleSearch = () => {
-    const formattedFilters = {
-      ...filters,
-      form: formatFormValue(filters.form),
-    };
-    onFilterChange(formattedFilters);
+    dispatch(fetchCampers(filters));
+  };
+  const isActiveFeature = (key) => {
+    // Проверяем активность фильтра, учитывая как большой, так и маленький регистр
+    const mappedKey = featureKeyMap[key]; // получаем правильный ключ из карты
+    return filters.features[mappedKey];
   };
 
   return (
@@ -96,23 +115,27 @@ export default function FiltersList({ onFilterChange }) {
             <h2 className={css.vehicleText}>Vehicle equipment</h2>
             <hr className={css.line} />
             <div className={css.vehicleContainer}>
-              {["AC", "Automatic", "Kitchen", "TV", "Bathroom"].map((item) => (
+              {[
+                { key: "AC", icon: <BsWind className={css.icon} /> },
+                { key: "Automatic", icon: <BsDiagram3 className={css.icon} /> },
+                { key: "Bathroom", icon: <PiShower className={css.icon} /> },
+                { key: "Kitchen", icon: <BsCupHot className={css.icon} /> },
+                { key: "TV", icon: <FaTv className={css.icon} /> },
+              ].map(({ key, icon }) => (
                 <button
-                  key={item}
-                  onClick={() => handleToggleEquipment(item)}
+                  key={key}
+                  onClick={() => handleToggleEquipment(key)} // Обновление выбранной характеристики.
                   className={`${css.button} ${
-                    filters.features.includes(item) ? css.activeButton : ""
-                  }`}
+                    key === "Automatic" && filters.transmission === "automatic"
+                      ? css.activeButton
+                      : filters.features[key]
+                      ? css.activeButton
+                      : ""
+                  } ${isActiveFeature(key) ? css.activeButton : ""}`}
                 >
                   <div className={css.buttonContainer}>
-                    {item === "AC" && <BsWind className={css.icon} />}
-                    {item === "Automatic" && (
-                      <BsDiagram3 className={css.icon} />
-                    )}
-                    {item === "Kitchen" && <BsCupHot className={css.icon} />}
-                    {item === "TV" && <FaTv className={css.icon} />}
-                    {item === "Bathroom" && <PiShower className={css.icon} />}
-                    <span>{item}</span>
+                    {icon}
+                    <span>{key}</span>
                   </div>
                 </button>
               ))}
