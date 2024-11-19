@@ -30,6 +30,13 @@ export default function CatalogList() {
   if (loading) {
     return <div>Loading...</div>;
   }
+  if (!campers.length) {
+    return (
+      <div className={css.noCampers}>
+        No campers found matching your request
+      </div>
+    );
+  }
 
   return (
     <div>
