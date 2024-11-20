@@ -148,3 +148,11 @@
     width: 20px;
     height: 20px;
 }
+.addFavoriteIcon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+}
+.addFavoriteIcon:active {
+    fill: red;
+}

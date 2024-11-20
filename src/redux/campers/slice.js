@@ -5,6 +5,13 @@ const vehicleTypeMap = {
   "Fully integrated": "fullyIntegrated",
   Alcove: "alcove",
 };
+const saveToLocalStorage = (key, data) => {
+  localStorage.setItem(key, JSON.stringify(data));
+};
+const getFromLocalStorage = (key) => {
+  const data = localStorage.getItem(key);
+  return data ? JSON.parse(data) : [];
+};
 
 export const fetchCampers = createAsyncThunk(
   "campers/fetchCampers",
@@ -26,21 +33,17 @@ export const fetchCampers = createAsyncThunk(
         transmission,
       };
 
-      // Добавляем фильтры из объекта features как отдельные параметры
       Object.keys(features).forEach((key) => {
         if (features[key]) {
-          queryParams[key] = true; // Добавляем параметр AC=true, TV=true и т.д.
+          queryParams[key] = true;
         }
       });
-
-      // Формируем строку запроса
       const queryString = Object.keys(queryParams)
         .map((key) => `${key}=${queryParams[key]}`)
         .join("&");
       const response = await axios.get(
         `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers?${queryString}`
       );
-      // Если статус 404, возвращаем пустые данные
       if (response.status === 404) {
         return { items: [], total: 0 };
       }
@@ -69,7 +72,7 @@ const campersSlice = createSlice({
       features: {},
       transmission: "",
     },
-    selectedCampers: [],
+    selectedCampers: getFromLocalStorage("selectedCampers"),
   },
   reducers: {
     setFilters(state, action) {
@@ -88,7 +91,7 @@ const campersSlice = createSlice({
     incrementPage(state) {
       state.filters.page += 1;
     },
-    toggleSelectCamper(state, action) {
+    addToFavorive(state, action) {
       const camperId = action.payload;
       if (state.selectedCampers.includes(camperId)) {
         state.selectedCampers = state.selectedCampers.filter(
@@ -97,6 +100,7 @@ const campersSlice = createSlice({
       } else {
         state.selectedCampers.push(camperId);
       }
+      saveToLocalStorage("selectedCampers", state.selectedCampers);
     },
   },
   extraReducers: (builder) => {
@@ -121,5 +125,6 @@ const campersSlice = createSlice({
   },
 });
 
-export const { setFilters, resetFilters, incrementPage } = campersSlice.actions;
+export const { setFilters, resetFilters, incrementPage, addToFavorive } =
+  campersSlice.actions;
 export default campersSlice.reducer;

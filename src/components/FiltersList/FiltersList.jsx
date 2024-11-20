@@ -9,33 +9,16 @@ import { BsGrid } from "react-icons/bs";
 import { BsGrid3X3Gap } from "react-icons/bs";
 import { useDispatch, useSelector } from "react-redux";
 import { setFilters, fetchCampers } from "../../redux/campers/slice";
-// const vehicleTypeDisplayMap = {
-//   Van: "panelTruck",
-//   "Fully integrated": "fullyIntegrated",
-//   Alcove: "alcove",
-// };
 
 export default function FiltersList() {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.campers.filters);
 
-  // const formatFormValue = (value) => {
-  //   switch (value) {
-  //     case "Van":
-  //       return "panelTruck";
-  //     case "Fully integrated":
-  //       return "fullyIntegrated";
-  //     case "Alcove":
-  //       return "alcove";
-  //     default:
-  //       return "";
-  //   }
-  // };
   const featureKeyMap = {
-    AC: "AC", // с большой буквы
-    Bathroom: "bathroom", // с маленькой
-    Kitchen: "kitchen", // с маленькой
-    TV: "TV", // с маленькой
+    AC: "AC",
+    Bathroom: "bathroom",
+    Kitchen: "kitchen",
+    TV: "TV",
   };
 
   const handleInputChange = (e) => {
@@ -68,8 +51,7 @@ export default function FiltersList() {
     dispatch(fetchCampers(filters));
   };
   const isActiveFeature = (key) => {
-    // Проверяем активность фильтра, учитывая как большой, так и маленький регистр
-    const mappedKey = featureKeyMap[key]; // получаем правильный ключ из карты
+    const mappedKey = featureKeyMap[key];
     return filters.features[mappedKey];
   };
 
