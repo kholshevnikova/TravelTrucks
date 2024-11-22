@@ -58,6 +58,20 @@ export const fetchCampers = createAsyncThunk(
   }
 );
 
+export const fetchCamperById = createAsyncThunk(
+  "campers/fetchCamperById",
+  async (id, thunkAPI) => {
+    try {
+      const response = await axios.get(
+        `https://66b1f8e71ca8ad33d4f5f63e.mockapi.io/campers?${id}`
+      );
+      return response.data;
+    } catch (error) {
+      thunkAPI.rejectWithValue(error);
+    }
+  }
+);
+
 const campersSlice = createSlice({
   name: "campers",
   initialState: {
@@ -121,6 +135,17 @@ const campersSlice = createSlice({
       .addCase(fetchCampers.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
+      })
+      .addCase(fetchCamperById.pending, (state) => {
+        state.loading = true;
+        state.error = null;
+      })
+      .addCase(fetchCamperById.fulfilled, (state, action) => {
+        state.campers = action.payload.items;
+      })
+      .addCase(fetchCamperById.rejected, (state) => {
+        state.loading = false;
+        state.error = true;
       });
   },
 });
