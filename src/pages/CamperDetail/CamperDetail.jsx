@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { NavLink, Outlet, useParams } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CamperDetail.module.css";
 import { useEffect } from "react";
@@ -75,6 +75,31 @@ export default function CamperDetail() {
           </ul>
           <p className={css.camperText}>{camper.description}</p>
         </div>
+        <ul className={css.detailsList}>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `${css.link} ${css.active}` : css.link
+              }
+              to="features"
+              end
+            >
+              Features
+            </NavLink>
+          </li>
+          <li>
+            <NavLink
+              className={({ isActive }) =>
+                isActive ? `${css.link} ${css.active}` : css.link
+              }
+              to="reviews"
+            >
+              Reviews
+            </NavLink>
+          </li>
+        </ul>
+        <hr className={css.line} />
+        <Outlet />
       </div>
     </section>
   );

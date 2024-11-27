@@ -4,6 +4,7 @@ import Header from "../Header/Header";
 import CatalogPage from "../../pages/CatalogPage/CatalogPage";
 
 import CamperDetail from "../../pages/CamperDetail/CamperDetail";
+import Features from "../Features/Features";
 // import css from "./App.module.css";
 
 function App() {
@@ -13,7 +14,10 @@ function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<CatalogPage />} />
-        <Route path="/catalog/:id" element={<CamperDetail />} />
+        <Route path="/catalog/:id" element={<CamperDetail />}>
+          <Route path="features" element={<Features />} />
+          {/* <Route path="reviews" element={<Reviews />} /> */}
+        </Route>
         {/* <Route path="*" element={<NotFound />} /> */}
       </Routes>
     </div>

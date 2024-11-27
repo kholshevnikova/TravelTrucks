@@ -1,0 +1,38 @@
+.featuresContainer {
+    width: 631px;
+    padding: 44px 52px 44px 52px;
+    background-color: var(--inputs);
+    border-radius: 10px;
+    /* height: 588px; */
+}
+.icon {
+    width:20px;
+    height: 20px;
+}
+.badgesContainer {
+    width: 527px;
+    height: 104px;
+    margin-bottom: 100px;
+}
+.badgesList {
+    list-style-type: none;
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    max-width: 527px;
+    padding-right: 41px;
+} 
+.badgesItem {
+    padding: 12px 18px 12px 18px;
+    border-radius: 100px;
+    max-height: 48px;
+    background: var(--badges);
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    text-align: center;
+    color: var(--main);
+}
