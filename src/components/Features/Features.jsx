@@ -96,8 +96,35 @@ export default function Features() {
                 </li>
               )}
             </ul>
-            <h3 className="">Vehicle details</h3>
           </div>
+          <h3 className={css.vehicleText}>Vehicle details</h3>
+          <hr className={css.line} />
+          <ul className={css.detailsList}>
+            <li className={css.detailsContainer}>
+              <p>Form</p>
+              <p>{capitalize(camper.form)}</p>
+            </li>
+            <li className={css.detailsContainer}>
+              <p>Length</p>
+              <p>{camper.length}</p>
+            </li>
+            <li className={css.detailsContainer}>
+              <p>Width</p>
+              <p>{camper.width}</p>
+            </li>
+            <li className={css.detailsContainer}>
+              <p>Height</p>
+              <p>{camper.height}</p>
+            </li>
+            <li className={css.detailsContainer}>
+              <p>Tank</p>
+              <p>{camper.tank}</p>
+            </li>
+            <li className={css.detailsContainer}>
+              <p>Consumption</p>
+              <p>{camper.consumption}</p>
+            </li>
+          </ul>
         </div>
       </section>
     </div>
