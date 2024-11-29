@@ -15,6 +15,15 @@ export default function Features() {
   const camper = campers.length > 0 ? campers[0] : null;
   const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 
+  const formatVehicleType = (type) => {
+    const typeMap = {
+      panelTruck: "Panel truck",
+      alcove: "Alcove",
+      fullyIntegrated: "Fully integrated",
+    };
+    return typeMap[type] || type;
+  };
+
   return (
     <div>
       <section className={css.featuresSection}>
@@ -102,7 +111,7 @@ export default function Features() {
           <ul className={css.detailsList}>
             <li className={css.detailsContainer}>
               <p>Form</p>
-              <p>{capitalize(camper.form)}</p>
+              <p>{formatVehicleType(camper.form)}</p>
             </li>
             <li className={css.detailsContainer}>
               <p>Length</p>
