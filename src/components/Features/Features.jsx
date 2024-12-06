@@ -9,6 +9,7 @@ import {
 } from "react-icons/bs";
 import { LuRefrigerator, LuMicrowave } from "react-icons/lu";
 import { IoWaterOutline } from "react-icons/io5";
+import Form from "../Form/Form";
 
 export default function Features() {
   const { campers } = useSelector((state) => state.campers);
@@ -135,6 +136,7 @@ export default function Features() {
             </li>
           </ul>
         </div>
+        <Form />
       </section>
     </div>
   );

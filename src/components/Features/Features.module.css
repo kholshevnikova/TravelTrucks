@@ -1,3 +1,10 @@
+
+.featuresSection {
+    display: flex;
+    gap:40px;
+}
+
+
 .featuresContainer {
     width: 527px;
     height: auto;
