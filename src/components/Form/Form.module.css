@@ -39,3 +39,58 @@ height: auto;
     margin-bottom: 14px;
 
 }
+.formButton {
+    margin-top: 10px;
+    border-radius: 200px;
+    padding: 16px 60px;
+    width: 166px;
+    height: 56px;
+    background: var(--button);
+    border: none;
+    font-family: var(--font-family);
+    font-weight: 500;
+    font-size: 16px;
+    line-height: 150%;
+    letter-spacing: -0.01em;
+    color: var(--white);
+}
+.datePickerWrapper {
+    position: relative;
+}
+.react-datepicker {
+    position: absolute;
+    top: calc(100% + 5px);
+    width: 276px;
+    height: 284px;
+    border: 1px solid var(--text);
+    border-radius: 12px;
+    left: 0;
+    z-index: 10;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+.react-datepicker__day {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    text-align: center;
+    color: var(--main);
+    width: 36px;
+    height: 36px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.react-datepicker__day--today {
+    font-family: var(--font-family);
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 120%;
+    text-align: center;
+    color: var(--main);
+    width: 36px;
+    height: 32px;
+    border-radius: 32px;
+    background-color: var(--text);
+
+}
