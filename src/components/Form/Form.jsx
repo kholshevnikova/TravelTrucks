@@ -7,16 +7,27 @@ import "react-datepicker/dist/react-datepicker.css";
 import css from "./Form.module.css";
 import "../../styles/react-datepicker-overrides.css";
 import { useState } from "react";
+import toast from "react-hot-toast";
+import { useParams } from "react-router-dom";
 
 export default function Booking() {
   const [startDate, setStartDate] = useState(null);
   const [placeholder, setPlaceholder] = useState("Booking date*");
+  const { id } = useParams();
 
   const handleDateFocus = () => {
     setPlaceholder("Select a date between today");
   };
   const handleDateBlur = () => {
     setPlaceholder("Booking date*");
+  };
+  const handleSubmit = (values) => {
+    try {
+      localStorage.setItem(`bookingCamper${id}`, JSON.stringify(values));
+      toast.success("Booking form sent successfully!");
+    } catch (error) {
+      toast.error("Something went wrong. Try again later.", error);
+    }
   };
   return (
     <div className={css.formContainer}>
@@ -26,9 +37,7 @@ export default function Booking() {
       </p>
       <Formik
         initialValues={{ username: "", email: "", date: null, comment: "" }}
-        onSubmit={(vaues) => {
-          console.log(vaues);
-        }}
+        onSubmit={handleSubmit}
       >
         {({ setFieldValue }) => (
           <Form className={css.form}>

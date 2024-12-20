@@ -38,3 +38,6 @@
     margin: 0 auto;
     border: none;
 }
+.heroButton:hover {
+    background: var(--button-hover);
+}

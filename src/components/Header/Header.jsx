@@ -6,18 +6,33 @@ export default function Header() {
   return (
     <header>
       <div className={css.container}>
-        <a href="" className={css.logo}>
+        <NavLink to="/" className={css.logo}>
           <img src={logo} alt="Logo" />
-        </a>
+        </NavLink>
+
         <nav className={css.navigation}>
           <ul className={css.navlist}>
             <li>
-              <NavLink to="/" className={css.navListItem}>
+              <NavLink
+                to="/"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${css.navListItem} ${css.active}`
+                    : css.navListItem
+                }
+              >
                 Home
               </NavLink>
             </li>
             <li>
-              <NavLink to="/catalog" className={css.navListItem}>
+              <NavLink
+                to="/catalog"
+                className={({ isActive }) =>
+                  isActive
+                    ? `${css.navListItem} ${css.active}`
+                    : css.navListItem
+                }
+              >
                 Catalog
               </NavLink>
             </li>

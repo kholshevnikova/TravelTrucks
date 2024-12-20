@@ -6,12 +6,16 @@ import CatalogPage from "../../pages/CatalogPage/CatalogPage";
 import CamperDetail from "../../pages/CamperDetail/CamperDetail";
 import Features from "../Features/Features";
 import Reviews from "../Reviews/Reviews";
+import { Toaster } from "react-hot-toast";
 // import css from "./App.module.css";
 
 function App() {
   return (
     <div>
       <Header />
+      <div>
+        <Toaster />
+      </div>
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/catalog" element={<CatalogPage />} />
