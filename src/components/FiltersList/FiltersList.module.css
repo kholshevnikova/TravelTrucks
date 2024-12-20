@@ -57,6 +57,9 @@
     border: none;
     margin-top: 40px;
 }
+.searchButton:hover {
+    background: var(--button-hover);
+}
 .vehicleText {
     margin-top: 32px;
 }

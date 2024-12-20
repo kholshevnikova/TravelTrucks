@@ -2,6 +2,7 @@ import { useSelector } from "react-redux";
 import css from "./Reviews.module.css";
 import RatingYellow from "../../assets/RatingYellow.svg";
 import RatingGray from "../../assets/RatingGray.svg";
+import Form from "../Form/Form";
 
 export default function Reviews() {
   const { campers } = useSelector((state) => state.campers);
@@ -24,31 +25,34 @@ export default function Reviews() {
   };
 
   return (
-    <div className={css.reviewsContainer}>
-      <ul className={css.reviewsList}>
-        {camper.reviews && camper.reviews.length > 0 ? (
-          camper.reviews.map((review, index) => (
-            <li className={css.imageWrapper} key={index}>
-              <div className={css.personContainer}>
-                <div className={css.avatarIcon}>
-                  {review.reviewer_name.charAt(0).toUpperCase()}
-                </div>
+    <section className={css.reviewsSection}>
+      <div className={css.reviewsContainer}>
+        <ul className={css.reviewsList}>
+          {camper.reviews && camper.reviews.length > 0 ? (
+            camper.reviews.map((review, index) => (
+              <li className={css.imageWrapper} key={index}>
+                <div className={css.personContainer}>
+                  <div className={css.avatarIcon}>
+                    {review.reviewer_name.charAt(0).toUpperCase()}
+                  </div>
 
-                <div className={css.nameWrapper}>
-                  <p className={css.reviewText}>{review.reviewer_name}</p>
-                  <div className={css.starsContainer}>
-                    {renderStars(review.reviewer_rating)}
+                  <div className={css.nameWrapper}>
+                    <p className={css.reviewText}>{review.reviewer_name}</p>
+                    <div className={css.starsContainer}>
+                      {renderStars(review.reviewer_rating)}
+                    </div>
                   </div>
                 </div>
-              </div>
 
-              <p className={css.reviewComment}>{review.comment}</p>
-            </li>
-          ))
-        ) : (
-          <p>No reviews available</p>
-        )}
-      </ul>
-    </div>
+                <p className={css.reviewComment}>{review.comment}</p>
+              </li>
+            ))
+          ) : (
+            <p>No reviews available</p>
+          )}
+        </ul>
+      </div>
+      <Form />
+    </section>
   );
 }

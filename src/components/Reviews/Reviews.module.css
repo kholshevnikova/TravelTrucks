@@ -1,3 +1,9 @@
+.reviewsSection {
+    display: flex;
+    gap: 40px;
+}
+
+
 .reviewsContainer {
     width: 631px;
 }
