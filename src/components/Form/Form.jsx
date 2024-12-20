@@ -1,8 +1,11 @@
 // import { Field, Formik } from "formik";
 import { Field, Form, Formik } from "formik";
-import css from "./Form.module.css";
+
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
+
+import css from "./Form.module.css";
+import "../../styles/react-datepicker-overrides.css";
 import { useState } from "react";
 
 export default function Booking() {
@@ -41,12 +44,6 @@ export default function Booking() {
               className={css.field}
               placeholder="Email*"
             ></Field>
-            {/* <Field
-            type="date"
-            name="date"
-            className={css.field}
-            placeholder="Booking date*"
-          ></Field> */}
             <div className={css.datePickerWrapper}>
               <DatePicker
                 selected={startDate}
@@ -59,13 +56,14 @@ export default function Booking() {
                 dateFormat="MMMM d, yyyy"
                 minDate={new Date()}
                 placeholderText={placeholder}
-                className={css.field}
+                className={`${css.field} ${css.datePicker}`}
+                popperClassName={css.datePickerPopper}
               />
             </div>
             <Field
               as="textarea"
               name="comment"
-              className={css.field}
+              className={`${css.field} ${css.textarea}`}
               placeholder="Comment"
             ></Field>
             <button type="submit" className={css.formButton}>
