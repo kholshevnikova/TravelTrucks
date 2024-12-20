@@ -165,3 +165,6 @@
 .addFavoriteIcon:active {
     fill: red;
 }
+.loader {
+    margin: 50px auto;
+}

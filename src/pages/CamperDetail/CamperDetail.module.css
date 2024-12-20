@@ -117,4 +117,7 @@ color: var(--main);
     color: var(--gray-light);
     margin-bottom: 44px;
 }
+.loader {
+    margin: 50px auto;
+}
 

@@ -6,6 +6,7 @@ import { incrementPage } from "../../redux/campers/slice.js";
 import { useNavigate } from "react-router-dom";
 import { BsWind, BsCupHot, BsFuelPump, BsDiagram3 } from "react-icons/bs";
 import { BsSuitHeart } from "react-icons/bs";
+import { DotLoader } from "react-spinners";
 
 const capitalize = (text) => text.charAt(0).toUpperCase() + text.slice(1);
 
@@ -34,7 +35,7 @@ export default function CatalogList() {
   };
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <DotLoader color="#d31f1f" className={css.loader} />;
   }
   if (!campers.length) {
     return (

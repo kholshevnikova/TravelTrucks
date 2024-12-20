@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import css from "./CamperDetail.module.css";
 import { useEffect } from "react";
 import { fetchCamperById } from "../../redux/campers/slice";
+import { DotLoader } from "react-spinners";
 
 export default function CamperDetail() {
   const { id } = useParams();
@@ -10,15 +11,15 @@ export default function CamperDetail() {
   const camper = useSelector((state) =>
     state.campers.campers.find((camper) => camper.id === id)
   );
-  const loading = useSelector((state) => state.loading);
-  const error = useSelector((state) => state.error);
+
+  const { loading, error } = useSelector((state) => state.campers);
 
   useEffect(() => {
     dispatch(fetchCamperById(id));
   }, [id, dispatch]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <DotLoader color="#d31f1f" className={css.loader} />;
   }
 
   if (error) {
