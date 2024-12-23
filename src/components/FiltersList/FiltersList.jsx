@@ -106,7 +106,7 @@ export default function FiltersList() {
               ].map(({ key, icon }) => (
                 <button
                   key={key}
-                  onClick={() => handleToggleEquipment(key)} // Обновление выбранной характеристики.
+                  onClick={() => handleToggleEquipment(key)}
                   className={`${css.button} ${
                     key === "Automatic" && filters.transmission === "automatic"
                       ? css.activeButton
