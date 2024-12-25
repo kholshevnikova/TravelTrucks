@@ -21,7 +21,7 @@ export const fetchCampers = createAsyncThunk(
         page = 1,
         location = "",
         form = "",
-        transmission,
+        transmission = "",
         features = {},
       } = filters || {};
       const formattedForm = vehicleTypeMap[form] || form;
@@ -116,6 +116,9 @@ const campersSlice = createSlice({
       }
       saveToLocalStorage("selectedCampers", state.selectedCampers);
     },
+    mergeCampers(state, action) {
+      state.campers = [...state.campers, ...action.payload];
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -151,6 +154,11 @@ const campersSlice = createSlice({
   },
 });
 
-export const { setFilters, resetFilters, incrementPage, addToFavorive } =
-  campersSlice.actions;
+export const {
+  setFilters,
+  resetFilters,
+  incrementPage,
+  addToFavorive,
+  mergeCampers,
+} = campersSlice.actions;
 export default campersSlice.reducer;

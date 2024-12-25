@@ -1,7 +1,11 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import css from "./CatalogList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import { fetchCampers, addToFavorive } from "../../redux/campers/slice.js";
+import {
+  fetchCampers,
+  addToFavorive,
+  mergeCampers,
+} from "../../redux/campers/slice.js";
 import { incrementPage } from "../../redux/campers/slice.js";
 import { useNavigate } from "react-router-dom";
 import { BsWind, BsCupHot, BsFuelPump, BsDiagram3 } from "react-icons/bs";
@@ -16,14 +20,21 @@ export default function CatalogList() {
   const { campers, filters, loading, total, selectedCampers } = useSelector(
     (state) => state.campers
   );
+  const [isLoadingMore, setIsLoadingMore] = useState(false);
 
   useEffect(() => {
-    dispatch(fetchCampers(filters));
-  }, [dispatch, filters]);
+    dispatch(fetchCampers({}));
+  }, [dispatch]);
 
-  const handleLoadMore = () => {
+  const handleLoadMore = async () => {
+    setIsLoadingMore(true);
     dispatch(incrementPage());
-    dispatch(fetchCampers({ ...filters, page: filters.page + 1 }));
+    const newCampers = await dispatch(
+      fetchCampers({ ...filters, page: filters.page + 1 })
+    );
+
+    dispatch(mergeCampers(newCampers.payload.items)); // Используем mergeCampers для объединения
+    setIsLoadingMore(false);
   };
 
   const handleShowMore = (id) => {
@@ -34,7 +45,7 @@ export default function CatalogList() {
     dispatch(addToFavorive(camperId));
   };
 
-  if (loading) {
+  if (loading && !isLoadingMore) {
     return <DotLoader color="#d31f1f" className={css.loader} />;
   }
   if (!campers.length) {
@@ -140,10 +151,21 @@ export default function CatalogList() {
             </li>
           ))}
         </ul>
+
         {filters.page * 4 < total && (
-          <button onClick={handleLoadMore} className={css.loadMoreButton}>
-            Load More
-          </button>
+          <div className={css.loadMoreContainer}>
+            {isLoadingMore ? (
+              <DotLoader
+                color="#d31f1f"
+                size={30}
+                className={css.loadMoreLoader}
+              />
+            ) : (
+              <button onClick={handleLoadMore} className={css.loadMoreButton}>
+                Load More
+              </button>
+            )}
+          </div>
         )}
       </section>
     </div>
