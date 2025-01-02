@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import css from "./CatalogList.module.css";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  fetchCampers,
-  addToFavorive,
-  mergeCampers,
-} from "../../redux/campers/slice.js";
+import { fetchCampers, addToFavorive } from "../../redux/campers/slice.js";
 import { incrementPage } from "../../redux/campers/slice.js";
 import { useNavigate } from "react-router-dom";
 import { BsWind, BsCupHot, BsFuelPump, BsDiagram3 } from "react-icons/bs";
@@ -29,11 +25,8 @@ export default function CatalogList() {
   const handleLoadMore = async () => {
     setIsLoadingMore(true);
     dispatch(incrementPage());
-    const newCampers = await dispatch(
-      fetchCampers({ ...filters, page: filters.page + 1 })
-    );
+    await dispatch(fetchCampers({ ...filters, page: filters.page + 1 }));
 
-    dispatch(mergeCampers(newCampers.payload.items)); // Используем mergeCampers для объединения
     setIsLoadingMore(false);
   };
 

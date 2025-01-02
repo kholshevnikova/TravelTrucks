@@ -5,6 +5,7 @@ const vehicleTypeMap = {
   "Fully integrated": "fullyIntegrated",
   Alcove: "alcove",
 };
+
 const saveToLocalStorage = (key, data) => {
   localStorage.setItem(key, JSON.stringify(data));
 };
@@ -92,6 +93,7 @@ const campersSlice = createSlice({
     setFilters(state, action) {
       state.filters = { ...state.filters, ...action.payload };
       state.filters.page = 1;
+      // saveToLocalStorage("filters", state.filters);
     },
     resetFilters(state) {
       state.filters = {
@@ -133,6 +135,7 @@ const campersSlice = createSlice({
         } else {
           state.campers = action.payload.items;
         }
+
         state.total = action.payload.total;
       })
       .addCase(fetchCampers.rejected, (state, action) => {

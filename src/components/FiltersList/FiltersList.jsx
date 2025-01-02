@@ -44,7 +44,11 @@ export default function FiltersList() {
   };
 
   const handleSetVehicleType = (type) => {
-    dispatch(setFilters({ form: type }));
+    if (filters.form === type) {
+      dispatch(setFilters({ form: "" }));
+    } else {
+      dispatch(setFilters({ form: type }));
+    }
   };
 
   const handleSearch = () => {
