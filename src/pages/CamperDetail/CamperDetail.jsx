@@ -1,4 +1,10 @@
-import { NavLink, Outlet, useParams } from "react-router-dom";
+import {
+  NavLink,
+  Outlet,
+  useLocation,
+  useNavigate,
+  useParams,
+} from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import css from "./CamperDetail.module.css";
 import { useEffect } from "react";
@@ -8,6 +14,8 @@ import { DotLoader } from "react-spinners";
 export default function CamperDetail() {
   const { id } = useParams();
   const dispatch = useDispatch();
+  const location = useLocation();
+  const navigate = useNavigate();
   const camper = useSelector((state) =>
     state.campers.campers.find((camper) => camper.id === id)
   );
@@ -17,6 +25,12 @@ export default function CamperDetail() {
   useEffect(() => {
     dispatch(fetchCamperById(id));
   }, [id, dispatch]);
+
+  useEffect(() => {
+    if (location.pathname === `/catalog/${id}`) {
+      navigate("features");
+    }
+  }, [id, location.pathname, navigate]);
 
   if (loading) {
     return <DotLoader color="#d31f1f" className={css.loader} />;
